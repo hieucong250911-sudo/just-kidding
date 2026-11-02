@@ -3,199 +3,385 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Android Security</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JUST KIDDING 2.0</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:#080b10;
+ color:white;
+ font-family:Arial,sans-serif;
+ overflow:hidden;
 }
 
-body {
-  margin: 0;
-  background: #090d12;
-  color: white;
-  font-family: Arial, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+.page{
+ display:none;
+ min-height:100vh;
+ width:100%;
+ padding:25px 18px;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ text-align:center;
 }
 
-.container {
-  width: 100%;
-  max-width: 430px;
-  text-align: center;
+.page.active{display:flex}
+
+/* TRANG 1 */
+
+#intro{
+ background:radial-gradient(#202b38,#05070b);
 }
 
-.warning {
-  color: #ff3333;
-  font-size: 27px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.warning-icon{
+ font-size:65px;
+ color:#ff3333;
 }
 
-.icon {
-  font-size: 65px;
-  margin-bottom: 15px;
+#intro h1{
+ color:#ff3333;
+ font-size:27px;
 }
 
-.message {
-  color: #ddd;
-  line-height: 1.7;
-  margin-bottom: 30px;
+#intro p{
+ color:#ccc;
+ line-height:1.7;
+ max-width:350px;
 }
 
-.bar-bg {
-  width: 100%;
-  height: 17px;
-  background: #252b33;
-  border-radius: 20px;
-  overflow: hidden;
+.buttons{
+ display:flex;
+ gap:12px;
+ margin-top:25px;
 }
 
-.bar {
-  width: 0%;
-  height: 100%;
-  background: #ff3030;
-  transition: width .15s;
+button{
+ border:0;
+ border-radius:8px;
+ padding:14px 19px;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer;
 }
 
-.percent {
-  margin-top: 12px;
-  color: #ff5555;
-  font-size: 23px;
+.agree{
+ background:#d92323;
+ color:white;
 }
 
-.status {
-  color: #888;
-  margin-top: 20px;
-  font-size: 13px;
-  min-height: 35px;
+.leave{
+ background:#273746;
+ color:white;
 }
 
-button {
-  margin-top: 30px;
-  padding: 15px 25px;
-  background: #b71c1c;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
+/* TRANG 2 */
+
+#attack{
+ background:#070a0d;
 }
 
-#rickroll {
-  display: none;
-  width: 100%;
+#attack h1{
+ color:#ff2525;
+ font-size:28px;
+ animation:blink .7s infinite alternate;
 }
 
-#rickroll h1 {
-  color: #ff3333;
-  font-size: 30px;
+@keyframes blink{
+ from{opacity:1}
+ to{opacity:.45}
 }
 
-video {
-  width: 100%;
-  border-radius: 12px;
+.status{
+ color:#ff7777;
+ margin:12px;
+ font-size:13px;
 }
+
+.bar-bg{
+ width:90%;
+ max-width:350px;
+ height:15px;
+ background:#292929;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:15px;
+}
+
+.bar{
+ height:100%;
+ width:0%;
+ background:#ff2525;
+}
+
+.percent{
+ margin-top:10px;
+ color:#ff4444;
+ font-size:23px;
+}
+
+#logs{
+ color:#8ee8a1;
+ font-family:monospace;
+ font-size:12px;
+ line-height:2;
+ margin-top:20px;
+}
+
+.glitch{
+ animation:shake .12s infinite;
+}
+
+@keyframes shake{
+ 0%{transform:translate(0,0)}
+ 25%{transform:translate(2px,-1px)}
+ 50%{transform:translate(-2px,1px)}
+ 75%{transform:translate(1px,2px)}
+ 100%{transform:translate(0,0)}
+}
+
+.exit{
+ position:fixed;
+ bottom:18px;
+ right:18px;
+ padding:10px 17px;
+ font-size:12px;
+ background:#39434d;
+ color:white;
+}
+
+/* TRANG 3: MÈO */
+
+#cats{
+ background:linear-gradient(150deg,#b9e9ff,#f5caff);
+ color:#333;
+ overflow:hidden;
+ position:relative;
+}
+
+#cats h1{
+ position:absolute;
+ top:20px;
+ z-index:2;
+ font-size:25px;
+ color:#7546a0;
+}
+
+.cat{
+ position:absolute;
+ font-size:45px;
+ animation:float 4s ease-in-out infinite alternate;
+ user-select:none;
+}
+
+@keyframes float{
+ 0%{transform:translateY(-35px) rotate(-12deg)}
+ 50%{transform:translateY(40px) rotate(12deg)}
+ 100%{transform:translateY(-20px) rotate(-8deg)}
+}
+
+@keyframes drift{
+ from{left:-15%}
+ to{left:110%}
+}
+
+.back{
+ position:fixed;
+ bottom:18px;
+ background:#8055ad;
+ color:white;
+ z-index:5;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container" id="main">
+<!-- TRANG 1 -->
 
-  <div class="icon">⚠️</div>
+<section id="intro" class="page active">
 
-  <div class="warning">
-    SECURITY ALERT
-  </div>
+ <div class="warning-icon">⚠️</div>
 
-  <div class="message">
-    Thiết bị đang được kiểm tra bảo mật.<br>
-    Phát hiện hoạt động bất thường.<br>
-    Thông tin có nguy cơ bị truy cập trái phép.
-  </div>
+ <h1>SECURITY WARNING</h1>
 
-  <div class="bar-bg">
-    <div class="bar" id="bar"></div>
-  </div>
+ <p>
+  Hệ thống phát hiện hoạt động bất thường
+  trên thiết bị của bạn.<br><br>
+  Bạn sắp truy cập vào một mô phỏng
+  hiệu ứng an ninh.
+ </p>
 
-  <div class="percent" id="percent">0%</div>
-
-  <div class="status" id="status">
-    Đang khởi tạo mô phỏng...
-  </div>
-
-  <button onclick="start()">BẮT ĐẦU</button>
-
-</div>
-
-<div class="container" id="rickroll">
-
-  <h1>😂 BẠN ĐÃ BỊ RICKROLL!</h1>
-
-  <video id="video" controls playsinline>
-    <source
-      src="https://files.catbox.moe/5n1yq5.mp4"
-      type="video/mp4">
-  </video>
-
-  <p>JUST KIDDING 😂</p>
-
-  <button onclick="location.reload()">
-    THOÁT
+ <div class="buttons">
+  <button class="agree" onclick="showPage('attack')">
+   ĐỒNG Ý
   </button>
 
-</div>
+  <button class="leave" onclick="showPage('cats')">
+   RỜI ĐI
+  </button>
+ </div>
+
+</section>
+
+<!-- TRANG 2 -->
+
+<section id="attack" class="page">
+
+ <div style="font-size:55px">☠️</div>
+
+ <h1>THIẾT BỊ ĐÃ BỊ XÂM NHẬP</h1>
+
+ <p class="status">
+  MÔ PHỎNG CẢNH BÁO AN NINH
+ </p>
+
+ <p id="message">
+  Đang khởi tạo mô phỏng...
+ </p>
+
+ <div class="bar-bg">
+  <div class="bar" id="bar"></div>
+ </div>
+
+ <div class="percent" id="percent">0%</div>
+
+ <div id="logs">
+  SYSTEM INITIALIZING...
+ </div>
+
+ <button class="exit" onclick="showPage('intro')">
+  THOÁT
+ </button>
+
+</section>
+
+<!-- TRANG 3 -->
+
+<section id="cats" class="page">
+
+ <h1>🐈 CHÀO MỪNG ĐẾN VƯƠNG QUỐC MÈO 🐈</h1>
+
+ <button class="back" onclick="showPage('intro')">
+  QUAY LẠI
+ </button>
+
+</section>
 
 <script>
-let started = false;
 
-function start() {
-  if (started) return;
-  started = true;
+let timer=null;
 
-  let progress = 0;
+function showPage(id){
 
-  const bar = document.getElementById("bar");
-  const percent = document.getElementById("percent");
-  const status = document.getElementById("status");
+ document.querySelectorAll('.page')
+ .forEach(p=>p.classList.remove('active'));
 
-  const messages = [
-    "Đang kiểm tra bảo mật...",
-    "Đang mô phỏng quét hệ thống...",
-    "Đang kiểm tra trạng thái thiết bị...",
-    "Đang hoàn tất mô phỏng..."
-  ];
+ document.getElementById(id)
+ .classList.add('active');
 
-  const timer = setInterval(() => {
-    progress++;
+ if(timer){
+  clearInterval(timer);
+  timer=null;
+ }
 
-    bar.style.width = progress + "%";
-    percent.textContent = progress + "%";
-
-    if (progress % 25 === 0) {
-      status.textContent =
-        messages[Math.floor(progress / 25) - 1];
-    }
-
-    if (progress >= 100) {
-      clearInterval(timer);
-
-      document.getElementById("main").style.display = "none";
-      document.getElementById("rickroll").style.display = "block";
-
-      const video = document.getElementById("video");
-      video.play().catch(() => {
-        status.textContent = "Chạm nút phát video để tiếp tục.";
-      });
-    }
-
-  }, 100);
+ if(id==='attack') startSimulation();
+ if(id==='cats') createCats();
 }
+
+/* HIỆU ỨNG MÔ PHỎNG */
+
+function startSimulation(){
+
+ let progress=0;
+
+ const bar=document.getElementById('bar');
+ const percent=document.getElementById('percent');
+ const message=document.getElementById('message');
+ const logs=document.getElementById('logs');
+
+ const messages=[
+  "Đang kiểm tra trạng thái thiết bị...",
+  "Đang mô phỏng quét hệ thống...",
+  "Đang kiểm tra kết nối...",
+  "Đang hoàn tất mô phỏng..."
+ ];
+
+ const lines=[
+  "SYSTEM CHECK...",
+  "SECURITY SCAN SIMULATED...",
+  "DEVICE STATUS: DEMO",
+  "PROCESSING...",
+  "SIMULATION RUNNING..."
+ ];
+
+ timer=setInterval(()=>{
+
+  progress++;
+
+  bar.style.width=progress+"%";
+  percent.textContent=progress+"%";
+
+  if(progress%25===0){
+   message.textContent=
+    messages[Math.floor(progress/25)-1];
+
+   logs.textContent=
+    lines[Math.floor(Math.random()*lines.length)];
+  }
+
+  if(progress===100){
+   clearInterval(timer);
+   timer=null;
+
+   message.textContent=
+    "MÔ PHỎNG HOÀN TẤT";
+
+   logs.textContent=
+    "JUST KIDDING 😂";
+  }
+
+ },100);
+
+}
+
+/* TẠO MÈO BAY */
+
+let catInterval=null;
+
+function createCats(){
+
+ const area=document.getElementById('cats');
+
+ area.querySelectorAll('.cat').forEach(c=>c.remove());
+
+ const emojis=[
+  "🐈","🐈‍⬛","😺","😸","😹",
+  "😻","😽","🙀","🐱"
+ ];
+
+ for(let i=0;i<22;i++){
+
+  const cat=document.createElement('div');
+
+  cat.className='cat';
+  cat.textContent=
+   emojis[Math.floor(Math.random()*emojis.length)];
+
+  cat.style.left=Math.random()*90+"%";
+  cat.style.top=Math.random()*85+"%";
+  cat.style.fontSize=(30+Math.random()*35)+"px";
+  cat.style.animationDuration=(2+Math.random()*4)+"s";
+  cat.style.animationDelay=(-Math.random()*4)+"s";
+
+  area.appendChild(cat);
+ }
+
+}
+
 </script>
 
 </body>
