@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Android Security</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #090d12;
+  color: white;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 430px;
+  text-align: center;
+}
+
+.warning {
+  color: #ff3333;
+  font-size: 27px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 65px;
+  margin-bottom: 15px;
+}
+
+.message {
+  color: #ddd;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.bar-bg {
+  width: 100%;
+  height: 17px;
+  background: #252b33;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.bar {
+  width: 0%;
+  height: 100%;
+  background: #ff3030;
+  transition: width .15s;
+}
+
+.percent {
+  margin-top: 12px;
+  color: #ff5555;
+  font-size: 23px;
+}
+
+.status {
+  color: #888;
+  margin-top: 20px;
+  font-size: 13px;
+  min-height: 35px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px 25px;
+  background: #b71c1c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#rickroll {
+  display: none;
+  width: 100%;
+}
+
+#rickroll h1 {
+  color: #ff3333;
+  font-size: 30px;
+}
+
+video {
+  width: 100%;
+  border-radius: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+
+  <div class="icon">⚠️</div>
+
+  <div class="warning">
+    SECURITY ALERT
+  </div>
+
+  <div class="message">
+    Thiết bị đang được kiểm tra bảo mật.<br>
+    Phát hiện hoạt động bất thường.<br>
+    Thông tin có nguy cơ bị truy cập trái phép.
+  </div>
+
+  <div class="bar-bg">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <div class="percent" id="percent">0%</div>
+
+  <div class="status" id="status">
+    Đang khởi tạo mô phỏng...
+  </div>
+
+  <button onclick="start()">BẮT ĐẦU</button>
+
+</div>
+
+<div class="container" id="rickroll">
+
+  <h1>😂 BẠN ĐÃ BỊ RICKROLL!</h1>
+
+  <video id="video" controls playsinline>
+    <source
+      src="https://files.catbox.moe/5n1yq5.mp4"
+      type="video/mp4">
+  </video>
+
+  <p>JUST KIDDING 😂</p>
+
+  <button onclick="location.reload()">
+    THOÁT
+  </button>
+
+</div>
+
+<script>
+let started = false;
+
+function start() {
+  if (started) return;
+  started = true;
+
+  let progress = 0;
+
+  const bar = document.getElementById("bar");
+  const percent = document.getElementById("percent");
+  const status = document.getElementById("status");
+
+  const messages = [
+    "Đang kiểm tra bảo mật...",
+    "Đang mô phỏng quét hệ thống...",
+    "Đang kiểm tra trạng thái thiết bị...",
+    "Đang hoàn tất mô phỏng..."
+  ];
+
+  const timer = setInterval(() => {
+    progress++;
+
+    bar.style.width = progress + "%";
+    percent.textContent = progress + "%";
+
+    if (progress % 25 === 0) {
+      status.textContent =
+        messages[Math.floor(progress / 25) - 1];
+    }
+
+    if (progress >= 100) {
+      clearInterval(timer);
+
+      document.getElementById("main").style.display = "none";
+      document.getElementById("rickroll").style.display = "block";
+
+      const video = document.getElementById("video");
+      video.play().catch(() => {
+        status.textContent = "Chạm nút phát video để tiếp tục.";
+      });
+    }
+
+  }, 100);
+}
+</script>
+
+</body>
+</html>
